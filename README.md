@@ -1,5 +1,5 @@
 # SampleApp-Webhooks-PHP
-Welcome to Intuit Developer's sample application for using Webhooks with the QuickBooks Online APIs and PHP. 
+Welcome to Intuit Developer's sample application for using [Webhooks](https://developer.intuit.com/docs/0100_accounting/0300_developer_guides/webhooks) with the QuickBooks Online APIs and PHP. 
 
 This sample code is meant to provide you fulling working examples of how to implement a successful webhook connection as well as the best practices for doing so. 
 
