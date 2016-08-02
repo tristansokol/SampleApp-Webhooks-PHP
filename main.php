@@ -47,7 +47,7 @@ if (isset($_SERVER['HTTP_INTUIT_SIGNATURE'])){
 }
 
 
-//Otherwise, intiate OAuth to connect an app to a sandbox company.
+//Otherwise, initiate OAuth to connect an app to a sandbox company.
 
 session_start();
 
