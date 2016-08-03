@@ -27,7 +27,8 @@ Locate the `credentials-sample.json` file and make a copy of it titled `credenti
 
 
 ## Step 4: Connect your app to a sandbox account
-Load your page, either from a local host or your exposed URL. You should be immediately prompted to log into your Intuit account, and connect a sandbox application. If everything goes well you should see "Congratulations, your app is now connected!"
+Load your page, either from a local host or your exposed URL. You should be immediately prompted to log into your Intuit account, and connect a sandbox application. If everything goes well you should see "Congratulations, your app is now connected!". After the app is connected, a basic query of your sandbox's customers is ran, so you should see the output of that on your page as well.
+All of your OAuth tokens are now stored in the `credentials.json` file. In a production environment you would want to find a more secure place for them. 
 
 ## Step 5: Test your webhook
 Launch the sandbox company that you connected to your app from your developer account. Make a change like creating a new customer or paying an invoice
@@ -36,7 +37,10 @@ Launch the sandbox company that you connected to your app from your developer ac
 Notifications are batched, so you will only get notified every five minutes. 
 
 ## Step 7: Check your logs
-Because you don't see the response of a webhook notification, you won't know that it happened unless you log the request. After you get a notification you can check the `request.log` file to see some of the details as well as the payload of your request. If everything went well you should see a log similar to this: 
+Because you don't see the response of a webhook notification, you won't know that it happened unless you log the request. After you get a notification you can check the `request.log` file to see some of the details as well as the payload of your request. 
+
+The code will automatically verify the request with the appropriate hash comparison, as well as execute a [change data capture](https://developer.intuit.com/docs/api/accounting/changedatacapture) call to get additional information about the webhook, just in case any data was lost. 
+If everything went well you should see a log similar to this: 
 ```
 Received a request at Mon Aug 1 14:11:42 at xxxxx.ngrok.io from intuit_notification_server/1.0
 Body of the request was :
@@ -70,6 +74,22 @@ stdClass Object
 )
 
 Request is verified
+Executing a Change Data Capture
+stdClass Object
+(
+    [CDCResponse] => Array
+        (
+            [0] => stdClass Object
+                (
+                    [QueryResponse] => Array
+                        (
+                            [0] => stdClass Object
+                                (
+                                    [Account] => Array
+                                        (
+                                            [0] => stdClass Object
+                                                (
+...
 ```
 
 If it doesn't work for you, submit an issue and I can try to debug the issue with you, or contact me at tristan_sokol@intuit.com
